@@ -21,7 +21,7 @@ const ResourcesList = ({resource}) => {
 
   }, [resource])
 
-    return <div>{resources.length}</div>;
+    return <ul>{resources.map((record) => <li id={record.id}>{record.title}</li>)}</ul>;
 
 }
 export default ResourcesList;
