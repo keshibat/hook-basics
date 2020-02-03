@@ -1,25 +1,28 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-class ResourcesList extends Component {
-  state = { resources: [] };
+const ResourcesList = ({resource}) => {
+  const [  resources, setResources ] = useState([]);
 
-  async componentDidMount() {
+
+  const fetchResource = async (resource) => {
     const response = await fetch(
-      `https://jsonplaceholder.typicode.com/${this.props.resource}`
+      `https://jsonplaceholder.typicode.com/${resource}`
     )
       .then(res => res.json())
       .catch(err => {
         console.log(err);
       });
 
-    this.setState = { resources: response };
-    console.log(response.length);
+    setResources(response);
   };
 
-  render() {
-     console.log(this.state.resources.length);
-    return <div>{this.state.resources.length}</div>;
-  }
+  useEffect(() => {
+    fetchResource(resource);
+
+  }, [resource])
+
+    return <div>{resources.length}</div>;
+
 }
 export default ResourcesList;
 
